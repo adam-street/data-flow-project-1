@@ -119,13 +119,4 @@ if __name__ == '__main__':
         order = generate_order()
         message_future = publish(publisher, topic_path, order)
         message_future.add_done_callback(callback)
-
-        timeout_seconds = random.choice(
-            range(
-                order_frequency_range['min'],
-                order_frequency_range['max'],
-                order_frequency_range['step']
-            )
-        )
-
         print(order)
