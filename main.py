@@ -114,7 +114,6 @@ def callback(message_future):
 
 
 if __name__ == '__main__':
-    
     for x in range(0, 19):
         order = generate_order()
         message_future = publish(publisher, topic_path, order)
