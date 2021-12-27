@@ -114,7 +114,8 @@ def callback(message_future):
 
 
 if __name__ == '__main__':
-    while True:
+    
+    for x in range(0, 19):
         order = generate_order()
         message_future = publish(publisher, topic_path, order)
         message_future.add_done_callback(callback)
