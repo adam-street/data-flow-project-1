@@ -15,25 +15,6 @@ ORDER_SUBSCRIPTION = "dataflow-project-orders-sub"
 STOCK_UPDATE_TOPIC = "dataflow-order-stock-update"
 PIPELINE_OPTIONS = PipelineOptions(streaming=True)
 
-PAYMENT_HISTORY_TABLE_SCHEMA = {
-    'fields': [
-        {'name': 'order_id', 'type': 'INTEGER', 'mode': 'REQUIRED'},
-        {"name": 'order_address', 'type': 'RECORD', 'mode': 'REPEATED',
-         'fields': [
-             {"name": 'order_building_number', 'type': 'STRING', 'mode': 'NULLABLE'},
-             {"name": 'order_street_name', 'type': 'STRING', 'mode': 'NULLABLE'},
-             {"name": 'order_city', "type": 'STRING', 'mode': 'NULLABLE'},
-             {"name": 'order_state_code', 'type': 'STRING', 'mode': 'NULLABLE'},
-             {"name": 'order_zip_code', 'type': 'STRING', 'mode': 'NULLABLE'},
-         ],
-         },
-        {"name": 'customer_first_name', 'type': 'STRING', 'mode': 'NULLABLE'},
-        {"name": 'customer_last_name', 'type': "STRING", 'mode': 'NULLABLE'},
-        {'name': 'customer_ip', 'type': 'STRING', 'mode': 'NULLABLE'},
-        {"name": 'cost_total', 'type': "FLOAT", 'mode': 'NULLABLE'}
-    ]
-}
-
 publisher = pubsub_v1.PublisherClient()
 stock_update_topic_path = publisher.topic_path(PROJECT_ID, STOCK_UPDATE_TOPIC)
 order_subscription_path = publisher.subscription_path(PROJECT_ID, ORDER_SUBSCRIPTION)
@@ -151,7 +132,6 @@ class generate_payment_record(beam.DoFn):
             "cost_total": element["cost_total"],
         }
 
-        print(record)
         yield record
 
 if __name__ == '__main__':
