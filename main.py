@@ -9,7 +9,7 @@ from google.cloud import pubsub_v1
 
 # pub/sub values
 PROJECT_ID = "york-cdf-start"
-TOPIC = "dataflow-project-orders"
+TOPIC = "hf-order-data"
 
 # range values
 order_frequency_range = {'min': 1, 'max': 5, 'step': 1}
